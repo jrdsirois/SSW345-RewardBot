@@ -1,3 +1,11 @@
 # SSW345-RewardBot
 
-This repository is for the SSW345 project in which the group makes a chat bot. This group has decided to make a RewardBot to be used in Discord. The bot is coded using Node.js, which is a JavaScript runtime.
+Group Members: 
+Jared Sirois github.com/jrdsirois
+
+Madeleine Daniell github.com/thelon-m
+
+Ruthy Levi 
+
+This GitHub Repository is for the SSW 345 project of creating a bot. The group has decided that would be a RewardBot that would be in a Discord Server. The bot will be coded in Node.js, a Javascript runtime. 
+
