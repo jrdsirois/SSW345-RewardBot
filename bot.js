@@ -36,12 +36,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: 'Hello! I am a bot. Use the command !help for some help.'
                 });
             break;
-            
+
             // !help
             case 'help':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'You fool! There is no help command there is only quarantine!'
+                    message: 'You fool! There is no help, command there is only quarantine!'
+                });
+            break;
+
+            // !egg
+            case 'egg':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'egg'
                 });
             break;
 
