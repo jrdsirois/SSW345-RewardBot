@@ -29,13 +29,23 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        
         args = args.splice(1);
         switch(cmd) {
-            // !ping
+            // !intro
             case 'intro':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'Hello! I am a bot.'
+                    message: 'Hello! I am a bot. Use the command !help for some help.'
                 });
             break;
+            
+            // !help
+            case 'help':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'You fool! There is no help command there is only quarantine!'
+                });
+            break;
+
+
             // Just add any case commands if you want to..
          }
      }
