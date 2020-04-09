@@ -20,6 +20,9 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
+// admin to be messaged by bot
+var adminID = 'adminDude';
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -41,7 +44,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             case 'help':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'You fool! There is no help, command there is only quarantine!'
+                    message: 'You fool! There is no help command; there is only quarantine!'
                 });
             break;
 
@@ -52,6 +55,15 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: 'egg'
                 });
             break;
+
+            // !promotionEligible
+            case 'promotionEligible':
+                bot.sendMessage({
+                    to: adminID,
+                    message: user + ' is eligible to be promoted to a Trusted User!' 
+                });
+            break;
+
 
 
             // Just add any case commands if you want to..
