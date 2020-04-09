@@ -1,0 +1,11 @@
+{
+  "name": "reward-bot",
+  "version": "1.0.0",
+  "description": "RewardBot in Discord for SSW345",
+  "main": "bot.js",
+  "author": "JaredSirois",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.2.1"
+  }
+}
