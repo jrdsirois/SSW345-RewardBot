@@ -14,6 +14,12 @@ var bot = new Discord.Client({
    autorun: true
 });
 
+bot.on('ready', () => {
+    console.log('Bot Launched and ready to roll!')
+    
+    //Any other stuff the bot can do on launch 
+});
+
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
@@ -45,14 +51,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 bot.sendMessage({
                     to: channelID,
                     message: 'You fool! There is no help command; there is only quarantine!'
-                });
-            break;
-
-            // !egg
-            case 'egg':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'egg'
                 });
             break;
 
