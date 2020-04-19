@@ -1,6 +1,64 @@
-var Discord = require('discord.io');
-var logger = require('winston');
-var auth = require('./auth.json');
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const prefix = "!"; //Our bot's prefix
+const fs = require('fs'); 
+const db = require('quick.db'); //Database to track user message counts
+
+client.on('ready', () => {
+    console.log('Logged in and ready to socially distance!')
+});
+
+client.on('guildMemberAdd', member => {
+
+    const channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
+    if(!channel) return;
+    channel.send(`Welcome to the server, **${member}**! Read the rules or suffer the wrath of RewardBot!`)
+
+});
+
+//This will run everytime a message is recieved
+client.on('message', message => {
+
+    let args = message.content.slice(prefix.length).trim().split(" ");
+    let cmd = args.shift().toLowerCase();
+
+    try { //This is allow bot commands to be placed in seperate files, so no need for constant if-else statements
+        let commandFile = require(`./commands/${cmd}.js`);
+        commandFile.run(client, message, args);
+    } catch(e) {
+       
+        console.log(e.message);
+
+    } finally {
+
+        console.log(`${message.author.username} ran the command: ${cmd}`);
+    }
+    
+
+    //Message Tracking/Leveling 
+    db.add(message.author.id + message.guild.id, 1)
+    let messages = db.get(message.author.id + message.guild.id)
+    db.add(`userLevel_${message.author.id + message.guild.id}`, 1)
+
+    if (messages == 20) {
+        const channel = message.channel;
+        channel.send(`Hey, ${message.author} you can be promoted!` );
+    }
+
+
+    if (message.content.startsWith(prefix + 'messageCount')) {
+        db.get(`userLevel_${message.author.id + message.guild.id}`)
+        message.channel.send('Messages sent: ' + (messages + 1)); //Returns messages and level
+    }
+
+
+    if (!message.content.startsWith(prefix)) return; //Ignores a message if it doesn't start with our prefix
+}); 
+
+client.login('Njk3NTk3NDEzNTg1ODQ2Mjg5.XpwIWQ.GWv2eZNKgoq-x-gOSKTbrBKGFE0');
+
+ /* var auth = require('./auth.json');
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
@@ -26,45 +84,16 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-// admin to be messaged by bot
-var adminID = 'adminDude';
+bot.on('guildMemberAdd', member => {
+     
+    //Send a message to #new-members channel that someone has joined
+    member.guild.channels.get('701291114539384862').send('**' + member.user.username + '**, has joined the server!');
 
-bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-       
-        args = args.splice(1);
-        switch(cmd) {
-            // !intro
-            case 'intro':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Hello! I am a bot. Use the command !help for some help.'
-                });
-            break;
+    //Looks for the role 'New Member' within the server
+    var role = member.guild.roles.find('name', 'New Member');
 
-            // !help
-            case 'help':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'You fool! There is no help command; there is only quarantine!'
-                });
-            break;
+    //Adds the role 'New Member' to the new user
+    member.addRole(role)
 
-            // !promotionEligible
-            case 'promotionEligible':
-                bot.sendMessage({
-                    to: adminID,
-                    message: user + ' is eligible to be promoted to a Trusted User!' 
-                });
-            break;
+}); */
 
-
-
-            // Just add any case commands if you want to..
-         }
-     }
-});
