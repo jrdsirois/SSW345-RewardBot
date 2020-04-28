@@ -12,6 +12,7 @@ Ruthy - Research Team & Recovery Team
 The group met twice over the course of the Process Milestone. During these meetings the group planned out which member would handle the stories that would be later added to the "Project" section of the group repository. 
 
 1st Meeting: 4/6/20
+
     -Stories developed: 
         Make Server and Bot - assigned to Jared
             Outcome - Completed Successfully
@@ -19,6 +20,7 @@ The group met twice over the course of the Process Milestone. During these meeti
             Outcome - Successfully Implemented 
 
 2nd Meeting: 4/17/20
+
     -Stories developed: 
         Research 24/7 Server - assigned to Ruthy
             Outcome - Research completed, but likely to not be pursued
